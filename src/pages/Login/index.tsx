@@ -1,11 +1,11 @@
 import logo from "@/assets/logo.png"
 import { LoginFormInput } from "@/components/Login-form-input"
-import { Link } from "react-router-dom"
-import {useForm} from 'react-hook-form'
+import { Link, useNavigate } from "react-router-dom"
+import { useForm } from 'react-hook-form'
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { api } from "@/utils/axios"
 import { Layout } from "@/components/layout"
+import { useTask } from "@/context/fetch-tasks/use-tasks"
 
 const signInLoginInputsSchemaValidation = z.object({
   email: z.string().email(),
@@ -16,14 +16,18 @@ type SignValidationSchema = z.infer<typeof signInLoginInputsSchemaValidation>
 
 export function Login(){
 
+  const navigate = useNavigate()
+
+  const {signIn} = useTask()
+
   const {register, handleSubmit} = useForm<SignValidationSchema>({
     resolver: zodResolver(signInLoginInputsSchemaValidation)
   })
 
   async function signInSubmit(data: SignValidationSchema){
     const {email, password} = data
-    const response = await api.post('/sessions',{email, password})
-    console.log(response)
+    signIn({email, password})
+    navigate('/')
   }
 
   return (

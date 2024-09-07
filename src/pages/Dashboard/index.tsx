@@ -1,8 +1,17 @@
 import { Layout } from "@/components/layout";
-import logo from "@/assets/logo.png"
+import logo from "@/assets/logo.png";
 import { TaskLine } from "@/components/Task-line";
+import { useTask } from "@/context/fetch-tasks/use-tasks";
+import { useEffect } from "react";
 
 export function Dashboard(){
+
+  const {tasks, fetchTasks} = useTask()
+
+  useEffect(() =>{
+    fetchTasks()
+  },[fetchTasks])
+
   return(
     <Layout>
       <div className="h-screen w-screen px-28 overflow-hidden">
@@ -29,8 +38,10 @@ export function Dashboard(){
             {/* {EDITAR COLOCAR COMO UM BOTÃO COM FUNDO ROSA DO HEADER, A COR BRANCA NA LETRA E UM SHADOW} */}
             <span className="text-text-pattern text-2xl font-bold mb-4 block">Nova tarefa</span>
           </nav>
-          <section className="bg-white p-5">
-            <TaskLine/>
+          <section className="bg-white p-5 flex flex-col gap-4">
+          {
+            tasks && tasks.map((task) => <TaskLine key={task.id} data={task}/>)
+          }
           </section>
         </div>
       </div>
