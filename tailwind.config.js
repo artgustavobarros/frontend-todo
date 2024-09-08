@@ -20,6 +20,7 @@ export default {
         'green-checkbox': '#3ba395',
         'bg-overlay':'rgba(0, 0, 0, 0.3)',
         'bg-dialog-color':'rgba(255, 255, 255, 0.5)',
+        'text-line-through': '#8d8d8d'
       }
     },
   },

@@ -8,15 +8,20 @@ interface DetailsProps {
   id: string
 }
 
-export function Details({id}: DetailsProps){
+const categoryMapper = {
+  'green':'verde',
+  'yellow':'amarela',
+  'red':'vermelha'
+}
 
+const statusMapper = {
+  'done': 'Concluído',
+  'undone': 'Em progresso'
+}
+
+export function Details({id}: DetailsProps){
   const {getTaskDetails} = useTask()
   const [task, setTask] = useState({} as Task)
-  const categoryMapper = {
-    'green':'verde',
-    'yellow':'amarela',
-    'red':'vermelha'
-  }
 
   async function handleDetails(){
     setTask(await getTaskDetails(id))
@@ -31,7 +36,7 @@ export function Details({id}: DetailsProps){
     <Dialog.Root>
       <Dialog.Trigger asChild>
         <button 
-          className="text-green-checkbox text-xs border border-green-checkbox p-2 rounded-md font-semibold"
+          className="text-green-checkbox text-xs border border-green-checkbox p-2 rounded-md font-semibold "
           onClick={handleDetails}
         >
           RESUMO
@@ -45,6 +50,7 @@ export function Details({id}: DetailsProps){
             <Dialog.Title className='font-bold text-2xl'>{task.title}</Dialog.Title>
             <h2><span className='font-bold'>Categoria: </span> {categoryMapper[task.category]}</h2>
             <h2><span>Conteúdo: </span> {task.content}</h2>
+            <h2><span>Estado: </span> {statusMapper[task.status]}</h2>
             <h2><span>Data de criação: </span> {dateFormat(task.createdAt)} </h2>
             <h2><span>Data de atualização: </span> {dateFormat(task.updatedAt)} </h2>
           </div>

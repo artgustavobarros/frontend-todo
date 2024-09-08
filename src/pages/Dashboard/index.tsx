@@ -1,16 +1,29 @@
 import { Layout } from "@/components/layout";
 import logo from "@/assets/logo.png";
+import { Nav } from "@/components/Nav";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "@/utils/axios";
 import { TaskLine } from "@/components/Task-line";
+import { Task } from "@/context/fetch-tasks/context";
 import { useTask } from "@/context/fetch-tasks/use-tasks";
-import { useEffect } from "react";
+
+interface FetchTasksListResponse{
+  tasks: Task[]
+}
 
 export function Dashboard(){
 
-  const {tasks, fetchTasks} = useTask()
+  const {tasks: dataTasks, handleSetTasks} = useTask()
 
-  useEffect(() =>{
-    fetchTasks()
-  },[fetchTasks])
+  const {data: tasks, isLoading } = useQuery<Task[]>({
+    queryKey:['todo-tasks'], 
+    queryFn: async () => { 
+      const response = await api.get<FetchTasksListResponse>('/tasks')
+      return response.data.tasks
+    }
+  })
+
+  handleSetTasks(tasks!)
 
   return(
     <Layout>
@@ -19,29 +32,14 @@ export function Dashboard(){
           <img src={logo}/>
         </header>
         <div className="grid grid-cols-[320px_1fr]">
-          <nav className="bg-background h-screen p-10 flex flex-col gap-8 border-r border-border">
-            <div>
-              <span className="text-text-pattern text-2xl font-bold mb-4 block">Categorias</span>
-              <ul className="space-y-2">
-                <li className="text-text-pattern text-xl font-light">Verde</li>
-                <li className="text-text-pattern text-xl font-light">Amarelo</li>
-                <li className="text-text-pattern text-xl font-light">Vermelho</li>
-              </ul>
-            </div>
-            <div>
-              <span className="text-text-pattern text-2xl font-bold mb-4 block">Status</span>
-              <ul className="space-y-2">
-                <li className="text-text-pattern text-xl font-light">Finalizado</li>
-                <li className="text-text-pattern text-xl font-light">Em progresso</li>
-              </ul>
-            </div>
-            {/* {EDITAR COLOCAR COMO UM BOTÃO COM FUNDO ROSA DO HEADER, A COR BRANCA NA LETRA E UM SHADOW} */}
-            <span className="text-text-pattern text-2xl font-bold mb-4 block">Nova tarefa</span>
-          </nav>
+          <Nav/>
           <section className="bg-white p-5 flex flex-col gap-4">
-          {
-            tasks && tasks.map((task) => <TaskLine key={task.id} data={task}/>)
-          }
+            {
+              isLoading && <p>Carregando...</p>
+            }
+            {
+              !isLoading && dataTasks && dataTasks.map((task) => <TaskLine key={task.id} data={task}/>)
+            }
           </section>
         </div>
       </div>
