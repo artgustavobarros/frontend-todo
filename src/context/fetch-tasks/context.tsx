@@ -50,10 +50,11 @@ interface FetchByTopicsRequest{
 }
 
 export interface TasksContextProps{
+  auth: string
   tasks: Task[]
   handleSetTasks:(tasks: Task[]) => Promise<void>
   signIn: ({email, password}: SignInRequest) => Promise<void>
-  fetchTasks: () => Promise<void>
+  signOut: () => Promise<void>
   getTaskDetails: (id: string) => Promise<Task>
   createNewTask:({title,content, category}: CreateTaskRequest) => Promise<void>
   deleteTask:(id: string) => Promise<void>
@@ -66,7 +67,7 @@ export const TasksContext = createContext({})
 
 export function TasksProvider ({children}: {children: ReactNode}){
 
-  const [, SetAuth] = useState('')
+  const [auth, setAuth] = useState('')
   const [tasks, setTasks] = useState<Task[]>([])
 
   function handleSetTasks(tasks: Task[]){
@@ -80,7 +81,7 @@ export function TasksProvider ({children}: {children: ReactNode}){
       api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
 
       localStorage.setItem('access_token',accessToken )
-      SetAuth(accessToken)
+      setAuth(accessToken)
     }catch(err){
       if(err instanceof Error){
         console.log(err)
@@ -88,16 +89,9 @@ export function TasksProvider ({children}: {children: ReactNode}){
     }
   }
 
-  async function fetchTasks(){
-    try{
-      const response = await api.get<FetchTasksResponse>('/tasks')
-      const {tasks} = response.data
-      setTasks(tasks)
-    }catch(err){
-      if(err instanceof Error){
-        console.log(err)
-      }
-    }
+  async function signOut(): Promise<void>{
+    localStorage.clear()
+    setAuth('')
   }
 
   async function getTaskDetails(id: string): Promise<Task>{
@@ -146,10 +140,11 @@ export function TasksProvider ({children}: {children: ReactNode}){
   return(
     <TasksContext.Provider value={
         {
+          auth,
           tasks,
           handleSetTasks, 
-          signIn, 
-          fetchTasks, 
+          signIn,
+          signOut, 
           getTaskDetails, 
           createNewTask, 
           deleteTask,

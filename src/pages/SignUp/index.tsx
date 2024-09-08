@@ -4,7 +4,7 @@ import { LoginFormInput } from "@/components/Login-form-input"
 import { api } from "@/utils/axios"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { z } from "zod"
 
 const signUpInputsSchemaValidation = z.object({
@@ -17,15 +17,16 @@ type SignUpFormValidationSchema = z.infer<typeof signUpInputsSchemaValidation>
 
 export function SignUp(){
 
+  const navigate = useNavigate()
+
   const {register, handleSubmit} = useForm<SignUpFormValidationSchema>({
     resolver: zodResolver(signUpInputsSchemaValidation)
   })
 
   async function handleSignUpSubmit(data: SignUpFormValidationSchema){
     const {name,email,password} = data
-    const response = await api.post('/accounts',{name, email, password})
-    const result = response.data
-    console.log(result)
+    await api.post('/accounts',{name, email, password})
+    navigate('/')
   }
 
   return (

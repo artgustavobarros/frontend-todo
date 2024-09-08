@@ -1,10 +1,19 @@
 import { useTask } from "@/context/fetch-tasks/use-tasks";
 import { GetByTopics } from "../GetByTopics";
 import { AddNewTask } from "../New-task";
+import { SignOut } from "@phosphor-icons/react";
+import { useNavigate } from "react-router-dom";
 
 export function Nav(){
 
-  const {fetchTasks} = useTask()
+  const {fetchTasks, signOut} = useTask()
+  const navigate = useNavigate()
+
+
+  function handleSignOut(){
+    signOut()
+    navigate('/')
+  }
 
   function handleFetchAllTasks(){
     fetchTasks()
@@ -31,6 +40,13 @@ export function Nav(){
         </ul>
       </div>
       <AddNewTask/>
+      <button 
+        className="font-bold mb-4 text-header rounded-md p-3 flex items-center justify-center gap-4" 
+        onClick={handleSignOut}
+      >
+        Sair
+        <SignOut className="w-5 h-5"/>
+      </button>
       </nav>
   )
 }

@@ -1,19 +1,9 @@
-import { Dashboard } from "@/pages/Dashboard"
-import { Login } from "@/pages/Login"
-import { SignUp } from "@/pages/SignUp"
-import {
-  createBrowserRouter,
-} from "react-router-dom"
+import { protectedRouter } from "./auth"
+import { RouterProvider } from "react-router-dom"
 
-export const router = createBrowserRouter([
-  {
-    path:'/sign-in',
-    element: <Login/>
-  }, {
-    path:'/sign-up',
-    element: <SignUp/>
-  },{
-    path: '/',
-    element: <Dashboard/>
-  }
-])
+export function Routes(){
+  const auth = localStorage.getItem('access_token')
+  const router = protectedRouter({logged: auth})
+
+  return <RouterProvider  router={router}/>
+}

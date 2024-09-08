@@ -1,4 +1,7 @@
+import { fetchByTopics } from "@/api/fetch-tasks-by-topics"
 import { useTask } from "@/context/fetch-tasks/use-tasks"
+import { useQuery } from "@tanstack/react-query"
+import { useEffect, useState } from "react"
 
 interface GetByTopicsProps{
   topics: 'category' | 'status'
@@ -14,14 +17,28 @@ const paramsMapper = {
   }
 
 export function GetByTopics({topics,params}: GetByTopicsProps){
-  const{fetchByTopics} = useTask()
 
-  function handleFetchTasks(){
-    fetchByTopics({params, topics})
+  const {handleSetTasks} = useTask()
+  const [enabled, setEnabled] = useState(false)
+
+  const {data: tasks, isLoading} = useQuery({
+    queryKey:['todo-tasks', `${topics}-${params}`], 
+    queryFn: async() => fetchByTopics({params, topics}),
+    enabled
+  })
+
+  function handleFetchTasksList(){
+    setEnabled(true)
   }
+
+  useEffect(() =>{
+    if(!isLoading && tasks){
+      handleSetTasks(tasks!)
+    }
+  },[])
   
   return(
-    <button onClick={handleFetchTasks}>
+    <button onClick={handleFetchTasksList}>
       <li className="text-text-pattern text-xl font-light">{paramsMapper[params]}</li>
     </button>
   )
