@@ -1,17 +1,19 @@
+import { Category } from "@/api/@types"
 import { fetchByTopics } from "@/api/fetch-tasks-by-topics"
 import { SkeletonTasks } from "@/components/skeleton-tasks"
 import { TaskLine } from "@/components/task-line"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router-dom"
 
-
 export function ShowTasksByCategory(){
 
-  const {params} = useParams()
+  const {params} = useParams<{params: Category}>()
   
   const {data: tasks, isLoading} = useQuery({
     queryKey:['todo-tasks', `category-${params}`], 
-    queryFn: async() => fetchByTopics({params, topics: 'category'}),
+    queryFn: async() => {
+      if (params) return fetchByTopics({params, topics: 'category'})
+    },
   })
   
   return (

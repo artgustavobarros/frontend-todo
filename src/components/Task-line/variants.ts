@@ -15,7 +15,7 @@ export const checkedDate = tv({
   variants: {
     progress: {
       undone: '',
-      done: 'text-text-text-muted',
+      done: 'text-text-muted',
     }
   }
 })
@@ -25,7 +25,7 @@ export const checkedDeleteButton = tv({
   variants: {
     progress: {
       undone: '',
-      done: 'text-text-text-muted',
+      done: 'text-text-muted',
     }
   }
 })

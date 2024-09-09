@@ -1,3 +1,4 @@
+import { Status } from "@/api/@types"
 import { fetchByTopics } from "@/api/fetch-tasks-by-topics"
 import { SkeletonTasks } from "@/components/skeleton-tasks"
 import { TaskLine } from "@/components/task-line"
@@ -7,11 +8,13 @@ import { useParams } from "react-router-dom"
 
 export function ShowTasksByStatus(){
 
-  const {params} = useParams()
+  const {params} = useParams<{params: Status}>()
   
   const {data: tasks, isLoading} = useQuery({
     queryKey:['todo-tasks', `status-${params}`], 
-    queryFn: async() => fetchByTopics({params, topics: 'status'}),
+    queryFn: async() =>{
+      if (params) return fetchByTopics({params, topics: 'category'})
+    },
   })
   
   return (
