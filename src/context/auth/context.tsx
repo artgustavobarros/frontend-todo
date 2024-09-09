@@ -1,5 +1,6 @@
-import { api } from "@/lib/axios";
+
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { api } from "../../lib/axios";
 
 interface SignInRequest{
   email: string

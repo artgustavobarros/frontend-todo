@@ -1,9 +1,10 @@
-import { useAuth } from "@/context/auth/use-tasks";
+
 import { GetByTopics } from "../get-by-topipcs";
 import { SignOut } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
 import { CreateNewTaskButton } from "../create-new-task-button";
 import { useMutation } from "@tanstack/react-query";
+import { useAuth } from "../../context/auth/use-tasks";
 
 export function Nav(){
 

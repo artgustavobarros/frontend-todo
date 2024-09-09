@@ -1,5 +1,6 @@
-import { Category } from "@/api/@types"
+
 import { tv } from "tailwind-variants"
+import { Category } from "../../api/@types"
 
 interface FlagProps{
   priority: Category

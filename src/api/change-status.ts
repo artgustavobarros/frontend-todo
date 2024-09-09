@@ -1,4 +1,5 @@
-import { api } from "@/lib/axios"
+
+import { api } from "../lib/axios"
 import { Status } from "./@types"
 
 interface ChangeStatusRequest{

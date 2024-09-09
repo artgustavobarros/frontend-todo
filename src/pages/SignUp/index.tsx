@@ -1,11 +1,11 @@
-import logo from "@/assets/logo.png"
-import { Layout } from "@/components/layout"
-import { LoginFormInput } from "@/components/login-form-input"
-import { api } from "@/lib/axios"
+import logo from "../../assets/logo.png"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom"
 import { z } from "zod"
+import { api } from "../../lib/axios"
+import { Layout } from "../../components/layout"
+import { LoginFormInput } from "../../components/login-form-input"
 
 const signUpInputsSchemaValidation = z.object({
   name: z.string(),

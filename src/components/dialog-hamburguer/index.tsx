@@ -1,8 +1,9 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import Hamburger from 'hamburger-react';
 import colors from 'tailwindcss/colors'
-import { Nav } from '../nav';
+
 import { useState } from 'react';
+import { Nav } from '../nav';
 
 export function DialogHamburguer(){
 

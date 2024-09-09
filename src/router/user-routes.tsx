@@ -1,9 +1,9 @@
-import { ShowAllTasks } from "@/components/tasks/all";
-import { ShowTasksByCategory } from "@/components/tasks/categories";
-import { ShowTasksByStatus } from "@/components/tasks/status";
-import { Dashboard } from "@/pages/Dashboard";
-import { PageNotFound } from "@/pages/Error404";
 import { createBrowserRouter } from "react-router-dom";
+import { ShowAllTasks } from "../components/tasks/all";
+import { ShowTasksByCategory } from "../components/tasks/categories";
+import { ShowTasksByStatus } from "../components/tasks/status";
+import { Dashboard } from "../pages/Dashboard";
+import { PageNotFound } from "../pages/Error404";
 
 export const userRoutes = createBrowserRouter([{
   path: '/',

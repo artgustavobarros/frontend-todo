@@ -1,9 +1,10 @@
-import { Task } from '@/api/@types';
+
 import * as Dialog from '@radix-ui/react-dialog';
 import dayjs from 'dayjs';
 import { checkedDetailsButton } from '../task-line/variants';
 import { X } from '@phosphor-icons/react';
-import { paramsMapper } from '@/utils/params-mapper';
+import { Task } from '../../api/@types';
+import { paramsMapper } from '../../utils/params-mapper';
 
 interface DetailsProps {
   data: Task

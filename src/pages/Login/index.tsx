@@ -1,12 +1,12 @@
-import logo from "@/assets/logo.png"
-import { LoginFormInput } from "@/components/login-form-input"
+import logo from '../../assets/logo.png'
 import { Link, useNavigate } from "react-router-dom"
 import { useForm } from 'react-hook-form'
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Layout } from "@/components/layout"
-import { useAuth } from "@/context/auth/use-tasks"
 import { useMutation } from "@tanstack/react-query"
+import { Layout } from "../../components/layout"
+import { LoginFormInput } from '../../components/login-form-input'
+import { useAuth } from '../../context/auth/use-tasks'
 
 const signInLoginInputsSchemaValidation = z.object({
   email: z.string().email(),

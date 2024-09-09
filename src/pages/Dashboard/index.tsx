@@ -1,8 +1,10 @@
-import { Layout } from "@/components/layout";
-import logo from "@/assets/logo.png";
-import { Nav } from "@/components/nav";
+
+import logo from '../../assets/logo.png';
 import { Outlet } from "react-router-dom";
-import { DialogHamburguer } from "@/components/dialog-hamburguer";
+import { DialogHamburguer } from "../../components/dialog-hamburguer";
+import { Nav } from "../../components/nav";
+import { Layout } from "../../components/layout";
+
 
 export function Dashboard(){
   

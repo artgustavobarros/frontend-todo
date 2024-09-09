@@ -1,5 +1,6 @@
-import { paramsMapper } from "@/utils/params-mapper"
+
 import { useNavigate } from "react-router-dom"
+import { paramsMapper } from "../../utils/params-mapper"
 
 interface GetByTopicsProps{
   topics: 'category' | 'status'

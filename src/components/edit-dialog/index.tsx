@@ -4,10 +4,10 @@ import { PrioritySelect } from '../priority-select';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Task } from '@/api/@types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { editTask } from '@/api/edit-task';
 import { checkedEditButton } from '../task-line/variants';
+import { Task } from '../../api/@types';
+import { editTask } from '../../api/edit-task';
 
 interface EditDialogProps{
   data: Task

@@ -1,4 +1,4 @@
-import { api } from "@/lib/axios"
+import { api } from "../lib/axios"
 import { Category } from "./@types"
 
 interface EditTaskRequest{

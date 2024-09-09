@@ -4,8 +4,8 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { PrioritySelect } from '../priority-select';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { registerTask } from '@/api/register-task';
 import { X } from '@phosphor-icons/react';
+import { registerTask } from '../../api/register-task';
 
 const createNewTaskInputValidationSchema = z.object({
   title: z.string(),

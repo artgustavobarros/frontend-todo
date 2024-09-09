@@ -1,9 +1,10 @@
-import { Status } from "@/api/@types"
-import { fetchByTopics } from "@/api/fetch-tasks-by-topics"
-import { SkeletonTasks } from "@/components/skeleton-tasks"
-import { TaskLine } from "@/components/task-line"
+
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router-dom"
+import { Status } from "../../../api/@types"
+import { fetchByTopics } from "../../../api/fetch-tasks-by-topics"
+import { SkeletonTasks } from "../../skeleton-tasks"
+import { TaskLine } from "../../task-line"
 
 
 export function ShowTasksByStatus(){

@@ -2,13 +2,13 @@ import { Check, Trash } from "@phosphor-icons/react";
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { Details } from "../details";
 import { EditDialog } from "../edit-dialog";
-import dayjs from '@/lib/dayjs';
-import { Flag } from "../flag";
-import { Task } from "@/api/@types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteTask } from "@/api/delete-task";
-import { changeStatus } from "@/api/change-status";
 import { checkedDate, checkedDeleteButton, checkedLabel } from "./variants";
+import dayjs from '../../lib/dayjs'
+import { Task } from "../../api/@types";
+import { changeStatus } from "../../api/change-status";
+import { deleteTask } from "../../api/delete-task";
+import { Flag } from "../flag";
 
 interface TasksLineProps{
   data: Task

@@ -1,10 +1,9 @@
-import { api } from "@/lib/axios";
-
-
+import { api } from "../lib/axios"
 interface ResetPasswordRequest {
+  email: string
   newPassword?: string
 }
 
-export async function resetPassword({newPassword}: ResetPasswordRequest){
-  await api.patch('/users/update',{newPassword})
+export async function resetPassword({email, newPassword}: ResetPasswordRequest){
+  await api.patch('/users/update',{email, newPassword})
 }

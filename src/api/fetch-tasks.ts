@@ -1,4 +1,4 @@
-import { api } from "@/lib/axios"
+import { api } from "../lib/axios"
 import { FetchTasksListResponse, Task } from "./@types"
 
 export async function fetchTasksList(): Promise<Task[]>{ 

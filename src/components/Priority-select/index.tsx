@@ -1,7 +1,7 @@
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { tv } from 'tailwind-variants';
-import { paramsMapper } from '@/utils/params-mapper';
+import { paramsMapper } from '../../utils/params-mapper';
 
 
 
