@@ -1,17 +1,18 @@
 import * as RadioGroup from '@radix-ui/react-radio-group';
-import { Control, Controller } from 'react-hook-form';
-import { CreateNewTaskFormSchema } from '../create-new-task-button';
-import { Category } from '@/api/@types';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { tv } from 'tailwind-variants';
+import { paramsMapper } from '@/utils/params-mapper';
 
-interface PrioritySelectProps{
-  control: Control<CreateNewTaskFormSchema, Category>
-  name: 'title' | 'content' | 'category'
+
+
+interface PrioritySelectProps<T extends FieldValues>{
+  control: Control<T>
+  name: Path<T>
 }
 
 
 const span = tv({
-  base: 'border rounded-md p-2 group-data-[state=checked]:text-white hover:text-white transition-all',
+  base: 'hidden md:block border rounded-md p-2 group-data-[state=checked]:text-white hover:text-white transition-all',
   variants: {
     color:{
       green:'text-green-600  border-green-600 group-data-[state=checked]:bg-green-600 hover:bg-green-600',
@@ -21,15 +22,21 @@ const span = tv({
   }
 })
 
+const smSpan = tv({
+  base: 'w-5 h-5 rounded-md block md:hidden bg-white hover:bg-white transition-all border',
+  variants: {
+    color:{
+      green:'group-data-[state=checked]:bg-green-600 border-green-600',
+      yellow: 'group-data-[state=checked]:bg-yellow-600 border-yellow-600',
+      red: 'group-data-[state=checked]:bg-red-600 border-red-600'
+    }
+  }
+})
+
 const categoryArray = ['green', 'yellow', 'red'] as const
 
-const categoryMapper = {
-  'green':'Verde',
-  'yellow':'Amarelo',
-  'red':'Vermelho'
-}
 
-export function PrioritySelect({control, name}: PrioritySelectProps){
+export function PrioritySelect<T extends FieldValues>({control, name}: PrioritySelectProps<T>){
 
   return(
     <Controller control={control} name={name}
@@ -41,8 +48,9 @@ export function PrioritySelect({control, name}: PrioritySelectProps){
             categoryArray.map((category) => (
               <RadioGroup.Item value={category} className='group' key={category}>
                 <RadioGroup.Indicator/>
+                <span className={smSpan({color:category})}></span>
                 <span className={span({color:category})}>
-                  {categoryMapper[category]}
+                  {paramsMapper[category]}
                 </span>
               </RadioGroup.Item>
             ))

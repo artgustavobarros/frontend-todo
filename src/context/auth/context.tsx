@@ -1,4 +1,4 @@
-import { api } from "@/utils/axios";
+import { api } from "@/lib/axios";
 import { createContext, ReactNode, useEffect, useState } from "react";
 
 interface SignInRequest{

@@ -6,6 +6,7 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Layout } from "@/components/layout"
 import { useAuth } from "@/context/auth/use-tasks"
+import { useMutation } from "@tanstack/react-query"
 
 const signInLoginInputsSchemaValidation = z.object({
   email: z.string().email(),
@@ -24,29 +25,38 @@ export function Login(){
     resolver: zodResolver(signInLoginInputsSchemaValidation)
   })
 
+  const {mutateAsync: signInFn} = useMutation({
+    mutationFn: signIn,
+    onSuccess(){
+      navigate('/')
+    }
+  })
+
   async function signInSubmit(data: SignValidationSchema){
     const {email, password} = data
-    signIn({email, password})
-    navigate('/')
+    signInFn({email, password})
   }
 
   return (
    <Layout>
-     <section className="w-[50rem] h-[30rem] bg-white flex rounded-3xl">
-        <div className="bg-header flex items-center justify-center">
+     <section className="lg:w-[50rem] lg:h-[30rem] lg:bg-white lg:flex text-center rounded-3xl h-screen w-screen">
+        <div className="bg-primary-header lg:flex items-center justify-center">
           <img src={logo} className="animate-moveInRight"/> 
         </div>
-        <div className="flex flex-col gap-8 p-8 ml-20 items-end">
-          <div className="flex flex-col items-end mt-10">
-            <h2 className="text-xl text-text-pattern-two font-bold">// TO<span> - </span>DO</h2>
-            <h1 className="text-3xl text-text-pattern italic">Organize it all <span>-</span></h1>
+        <div className="flex flex-col gap-8 p-8 md:ml-20 lg:items-end">
+          <div className="flex flex-col lg:items-end mt-10">
+            <h2 className="text-xl text-text-secondary font-bold">// TO - DO</h2>
+            <h1 className="text-3xl text-text-primary italic">Organize it all -</h1>
           </div>
-          <form className="flex flex-col gap-4" onSubmit={handleSubmit(signInSubmit)} id="sign-in"> 
+          <form className="flex flex-col gap-4 items-center lg:items-start" onSubmit={handleSubmit(signInSubmit)} id="sign-in"> 
             <LoginFormInput placeholder="// Seu email" type="email" {...register('email')}/>
             <LoginFormInput placeholder="// Sua senha" type="password" {...register('password')} autoComplete="current-password"/>
           </form>
-          <button type="submit" form="sign-in" className="text-text-pattern transition-all hover:font-normal hover:before:content-['//_']">entrar</button>
-          <Link to={'/sign-up'} className="text-text-pattern transition-all hover:font-normal hover:before:content-['//_']">crie sua conta</Link>
+          <div className="flex lg:flex-col gap-2 items-end justify-center">
+            <button type="submit" form="sign-in" className="text-text-primary transition-all hover:font-normal hover:before:content-['//_']">entrar</button>
+            <Link to={'/recover'} className="text-text-primary transition-all hover:font-normal hover:before:content-['//_']">esqueceu sua senha?</Link>
+            <Link to={'/sign-up'} className="text-text-primary transition-all hover:font-normal hover:before:content-['//_']">crie sua conta</Link>
+          </div>
         </div>
       </section>
    </Layout>

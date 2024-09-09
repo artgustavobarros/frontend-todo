@@ -1,4 +1,4 @@
-import { api } from "@/utils/axios"
+import { api } from "@/lib/axios"
 import { FetchTasksListResponse } from "./@types"
 
 interface FetchByTopicsRequest{

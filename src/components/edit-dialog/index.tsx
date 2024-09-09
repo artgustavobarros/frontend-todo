@@ -1,4 +1,4 @@
-import { PencilLine } from '@phosphor-icons/react';
+import { PencilLine, X } from '@phosphor-icons/react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { PrioritySelect } from '../priority-select';
 import { z } from 'zod';
@@ -13,18 +13,18 @@ interface EditDialogProps{
   data: Task
 }
 
-const editTaskInputsValidation = z.object({
+const editTaskInputsValidationSchema = z.object({
   title: z.string().optional(),
   content: z.string().optional(),
   category: z.enum(['green', 'yellow', 'red']).optional()
 })
 
-type EditTaskFormSchema = z.infer<typeof editTaskInputsValidation>
+export type EditTaskFormSchema = z.infer<typeof editTaskInputsValidationSchema>
 
 export function EditDialog({data}: EditDialogProps){
   const queryClient = useQueryClient()
 
-  const {register, handleSubmit, control} = useForm<EditTaskFormSchema>({resolver: zodResolver(editTaskInputsValidation)})
+  const {register, handleSubmit, control} = useForm<EditTaskFormSchema>({resolver: zodResolver(editTaskInputsValidationSchema)})
 
   const {mutateAsync: editTaskFn} = useMutation({
     mutationFn: editTask,
@@ -48,9 +48,9 @@ export function EditDialog({data}: EditDialogProps){
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className='fixed inset-0 bg-bg-overlay backdrop-blur-md'/>
-        <Dialog.Content className='fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]'>
+        <Dialog.Content className='fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] animate-blowUpModalOpen'>
           <Dialog.Description className='sr-only'>Editar atividade</Dialog.Description>
-          <div className='bg-bg-dialog-color p-10 text-text-pattern text-lg space-y-2 w-[45rem] rounded-md bg-white'>
+          <div className='bg-bg-dialog p-10 text-text-primary text-lg space-y-2 md:w-[45rem] w-80 rounded-md bg-white'>
           <Dialog.Title className='sr-only'>{data.title}</Dialog.Title>
           <form className='flex flex-col gap-2 bg-white' onSubmit={handleSubmit(handleEditTask)}>
             <div className='flex flex-col bg-transparent'>
@@ -60,11 +60,16 @@ export function EditDialog({data}: EditDialogProps){
               <textarea placeholder={data.content} className='outline-none resize-none placeholder:text-sm text-sm p-2 bg-transparent' {...register('content')}/>
             </div>
             <div className='flex mt-4 items-center justify-between'>
-              <span className='flex gap-4'>prioridade: <PrioritySelect control={control} name='category'/></span>
-              <button className='text-green-checkbox border rounded-md border-green-checkbox p-2 hover:text-white hover:bg-green-checkbox transition-all'>alterar</button>
+              <span className='flex md:flex-row flex-col gap-4 items-center'>prioridade: <PrioritySelect<EditTaskFormSchema> control={control} name='category'/></span>
+              <button className='text-checkbox-active border rounded-md border-checkbox-active p-2 hover:text-white hover:bg-checkbox-active transition-all'>alterar</button>
             </div>
           </form>
         </div>
+        <Dialog.Close asChild>
+          <button className='text-checkbox-active absolute top-4 right-4'>
+            <X className='w-5 h-5'/>
+          </button>
+        </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

@@ -1,4 +1,5 @@
 import { fetchByTopics } from "@/api/fetch-tasks-by-topics"
+import { SkeletonTasks } from "@/components/skeleton-tasks"
 import { TaskLine } from "@/components/task-line"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router-dom"
@@ -16,7 +17,7 @@ export function ShowTasksByStatus(){
   return (
     <>
       {
-        isLoading && <p>Carregando...</p>
+        isLoading && <SkeletonTasks/>
       }
       {
         !isLoading && tasks && tasks.map((task) => <TaskLine key={task.id} data={task}/>)

@@ -1,5 +1,6 @@
 import { Task } from "@/api/@types"
 import { fetchTasksList } from "@/api/fetch-tasks"
+import { SkeletonTasks } from "@/components/skeleton-tasks"
 import { TaskLine } from "@/components/task-line"
 import { useQuery } from "@tanstack/react-query"
 
@@ -13,7 +14,7 @@ export function ShowAllTasks(){
   return (
     <>
       {
-        isLoading && <p>Carregando...</p>
+        isLoading && <SkeletonTasks/>
       }
       {
         !isLoading && tasks && tasks.map((task) => <TaskLine key={task.id} data={task}/>)

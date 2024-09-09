@@ -8,19 +8,23 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'hero-pattern': "linear-gradient(to right bottom, rgba(59, 163, 149, 0.8), rgba(117, 216, 213, 0.9)), url('/src/assets/wood-bg.jpg')"
+        'wood-pattern': "linear-gradient(to right bottom, rgba(59, 163, 149, 0.8), rgba(117, 216, 213, 0.9)), url('/src/assets/wood-bg.jpg')"
       },
       colors: {
-        header: '#c38d9e',
-        background: '#eee',
-        white: '#f7f7f7',
-        'text-pattern': '#501f3a',
-        'text-pattern-two': '#141414',
+        'primary-header': '#c38d9e',
+        bg:{
+          light: '#eee',
+          suface: '#f7f7f7',
+          overlay: 'rgba(0, 0, 0, 0.3)',
+          dialog:'rgba(255, 255, 255, 0.5)',
+        },
+        text:{
+          primary: '#501f3a',
+          secondary: '#141414',
+          muted: '#8d8d8d'
+        },
         border: '#b9b9b9',
-        'green-checkbox': '#3ba395',
-        'bg-overlay':'rgba(0, 0, 0, 0.3)',
-        'bg-dialog-color':'rgba(255, 255, 255, 0.5)',
-        'text-line-through': '#8d8d8d',
+        'checkbox-active': '#3ba395',
       },
       boxShadow: {
         'pattern': '0 2rem 4rem rgba(0, 0, 0, 0.6)',
@@ -36,10 +40,34 @@ export default {
               opacity: '1',
               transform: 'translateX(0)',
             },
+        },
+        blowUpModalOpen:{
+          '0%':{
+            transform: 'scale(0) translate(-50%, -50%)',
+            },
+          '100%':{
+            transform: 'scale(1) translate(-50%, -50%)',
+          }
+        },
+        blowUpModalClose:{
+          '0%':{
+            transform: 'scale(1) translate(-50%, -50%)',
+            },
+          '100%':{
+            transform: 'scale(0) translate(-50%, -50%)',
+          }
         }
       },
       animation: {
-        moveInRight: 'moveInRight 1.7s'
+        moveInRight: 'moveInRight 1.7s',
+        moveInRightFaster: 'moveInRight 0.5s',
+        blowUpModalOpen: 'blowUpModalOpen 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards',
+        blowUpModalClose: 'blowUpModalClose 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards'
+      },
+      screens:{
+        sm: '500px',
+        md: '760px',
+        lg: '1285px'
       }
     },
   },
