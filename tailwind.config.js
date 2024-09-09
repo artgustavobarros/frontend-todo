@@ -20,7 +20,26 @@ export default {
         'green-checkbox': '#3ba395',
         'bg-overlay':'rgba(0, 0, 0, 0.3)',
         'bg-dialog-color':'rgba(255, 255, 255, 0.5)',
-        'text-line-through': '#8d8d8d'
+        'text-line-through': '#8d8d8d',
+      },
+      boxShadow: {
+        'pattern': '0 2rem 4rem rgba(0, 0, 0, 0.6)',
+        'pattern-two': '0.2rem 0.5rem 1rem rgba(0, 0, 0, 0.4)'
+      },
+      keyframes: {
+        moveInRight:{
+          '0%': {
+              opacity: '0',
+              transform: 'translateX(10rem)'
+            },
+          '100%': {
+              opacity: '1',
+              transform: 'translateX(0)',
+            },
+        }
+      },
+      animation: {
+        moveInRight: 'moveInRight 1.7s'
       }
     },
   },

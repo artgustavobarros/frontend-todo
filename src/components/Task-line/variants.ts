@@ -21,7 +21,7 @@ export const checkedDate = tv({
 })
 
 export const checkedDeleteButton = tv({
-  base: 'text-text-pattern-two',
+  base: 'text-text-pattern-two hover:text-green-checkbox transition all',
   variants: {
     progress: {
       undone: '',
@@ -31,7 +31,7 @@ export const checkedDeleteButton = tv({
 })
 
 export const checkedDetailsButton = tv({
-  base: "text-green-checkbox text-xs border border-green-checkbox p-2 rounded-md font-semibold ",
+  base: "text-green-checkbox text-xs border border-green-checkbox p-2 rounded-md font-semibold transition-all hover:text-white hover:bg-green-checkbox",
   variants: {
     progress: {
       undone: '',
@@ -41,7 +41,7 @@ export const checkedDetailsButton = tv({
 })
 
 export const checkedEditButton = tv({
-  base: "text-text-pattern text-xl",
+  base: "text-text-pattern text-xl hover:text-green-checkbox transition-all",
   variants: {
     progress: {
       undone: '',

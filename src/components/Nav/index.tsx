@@ -40,7 +40,7 @@ export function Nav(){
       </div>
       <CreateNewTaskButton/>
       <button 
-        className="font-bold mb-4 text-header rounded-md p-3 flex items-center justify-center gap-4" 
+        className="font-bold mb-4 text-header rounded-md p-3 flex items-center justify-center gap-4 transition-all hover:opacity-90" 
         onClick={handleSignOut}
       >
         Sair

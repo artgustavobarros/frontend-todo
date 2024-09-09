@@ -34,7 +34,7 @@ export function Login(){
    <Layout>
      <section className="w-[50rem] h-[30rem] bg-white flex rounded-3xl">
         <div className="bg-header flex items-center justify-center">
-          <img src={logo}/> 
+          <img src={logo} className="animate-moveInRight"/> 
         </div>
         <div className="flex flex-col gap-8 p-8 ml-20 items-end">
           <div className="flex flex-col items-end mt-10">
@@ -45,8 +45,8 @@ export function Login(){
             <LoginFormInput placeholder="// Seu email" type="email" {...register('email')}/>
             <LoginFormInput placeholder="// Sua senha" type="password" {...register('password')} autoComplete="current-password"/>
           </form>
-          <button type="submit" form="sign-in">// entrar</button>
-          <Link to={'/sign-up'} className="text-text-pattern">// crie sua conta</Link>
+          <button type="submit" form="sign-in" className="text-text-pattern transition-all hover:font-normal hover:before:content-['//_']">entrar</button>
+          <Link to={'/sign-up'} className="text-text-pattern transition-all hover:font-normal hover:before:content-['//_']">crie sua conta</Link>
         </div>
       </section>
    </Layout>

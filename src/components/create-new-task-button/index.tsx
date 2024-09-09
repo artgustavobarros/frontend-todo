@@ -37,7 +37,7 @@ export function CreateNewTaskButton(){
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className="text-white text-2xl font-bold mb-4 block bg-header rounded-md p-3">Nova tarefa</button>
+        <button className="text-white text-2xl font-bold mb-4 block bg-header rounded-md p-3 shadow-pattern-two hover:opacity-90 transition-all">Nova tarefa</button>
       </Dialog.Trigger>
       <Dialog.Overlay className='fixed inset-0 bg-bg-overlay backdrop-blur-md'/>
       <Dialog.Content className='fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]'>
@@ -53,7 +53,7 @@ export function CreateNewTaskButton(){
               <span className='flex gap-4'>prioridade: 
                <PrioritySelect control={control} name='category'/>
               </span>
-              <button className='text-green-checkbox border rounded-md border-green-checkbox p-2'>criar</button>  
+              <button className='text-green-checkbox border rounded-md border-green-checkbox p-2 hover:text-white hover:bg-green-checkbox transition-all'>criar</button>  
             </div>
           </form>
         </div>

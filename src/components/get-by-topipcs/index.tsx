@@ -23,7 +23,11 @@ export function GetByTopics({topics,params}: GetByTopicsProps){
 
   return(
     <button onClick={handleNavigate}>
-      <li className="text-text-pattern text-xl font-light">{paramsMapper[params]}</li>
+      <li 
+        className="block text-text-pattern text-xl font-light transition-all hover:font-normal hover:before:content-['//_']"
+      >
+        {paramsMapper[params]}
+      </li>
     </button>
   )
 }

@@ -61,7 +61,7 @@ export function EditDialog({data}: EditDialogProps){
             </div>
             <div className='flex mt-4 items-center justify-between'>
               <span className='flex gap-4'>prioridade: <PrioritySelect control={control} name='category'/></span>
-              <button className='text-green-checkbox border rounded-md border-green-checkbox p-2'>alterar</button>
+              <button className='text-green-checkbox border rounded-md border-green-checkbox p-2 hover:text-white hover:bg-green-checkbox transition-all'>alterar</button>
             </div>
           </form>
         </div>

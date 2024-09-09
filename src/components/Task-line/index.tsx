@@ -45,7 +45,7 @@ export function TaskLine({data}: TasksLineProps){
   }
 
   return(
-    <div className="bg-background h-14 flex items-center  text-lg gap-4">
+    <div className="bg-background h-14 flex items-center text-lg gap-4 hover:scale-105 hover:shadow-pattern-two transition-all">
       <Flag priority={data.category}/>
       <div className="flex justify-between w-full px-5 py-3 rounded-sm">
         <div className="grid grid-cols-[0.5rem_1fr_4.5rem_4.5rem_0.625rem_0.625rem] w-full items-center gap-4">
