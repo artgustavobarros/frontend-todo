@@ -1,6 +1,6 @@
 import logo from "@/assets/logo.png"
 import { Layout } from "@/components/layout"
-import { LoginFormInput } from "@/components/Login-form-input"
+import { LoginFormInput } from "@/components/login-form-input"
 import { api } from "@/utils/axios"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"

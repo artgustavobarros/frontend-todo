@@ -1,11 +1,11 @@
 import logo from "@/assets/logo.png"
-import { LoginFormInput } from "@/components/Login-form-input"
+import { LoginFormInput } from "@/components/login-form-input"
 import { Link, useNavigate } from "react-router-dom"
 import { useForm } from 'react-hook-form'
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Layout } from "@/components/layout"
-import { useTask } from "@/context/fetch-tasks/use-tasks"
+import { useAuth } from "@/context/auth/use-tasks"
 
 const signInLoginInputsSchemaValidation = z.object({
   email: z.string().email(),
@@ -18,7 +18,7 @@ export function Login(){
 
   const navigate = useNavigate()
 
-  const {signIn} = useTask()
+  const {signIn} = useAuth()
 
   const {register, handleSubmit} = useForm<SignValidationSchema>({
     resolver: zodResolver(signInLoginInputsSchemaValidation)

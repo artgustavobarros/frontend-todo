@@ -2,9 +2,9 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { PrioritySelect } from '../Priority-select';
-import { useTask } from '@/context/fetch-tasks/use-tasks';
-
+import { PrioritySelect } from '../priority-select';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { registerTask } from '@/api/register-task';
 
 const createNewTaskValidationSchema = z.object({
   title: z.string(),
@@ -14,17 +14,24 @@ const createNewTaskValidationSchema = z.object({
 
 export type CreateNewTaskFormSchema = z.infer<typeof createNewTaskValidationSchema>
 
-export function AddNewTask(){
+export function CreateNewTaskButton(){
 
-  const {createNewTask} = useTask()
+  const queryClient = useQueryClient();
 
   const {register, handleSubmit, control} = useForm<CreateNewTaskFormSchema>({
     resolver: zodResolver(createNewTaskValidationSchema)
   })
 
+  const {mutateAsync: registerTaskFn} = useMutation({
+    mutationFn: registerTask,
+    onSuccess(){
+      queryClient.invalidateQueries({queryKey: ['todo-tasks']})
+    }
+  })
+
   function handleNewTask(data: CreateNewTaskFormSchema){
     const {title, content, category} = data
-    createNewTask({title, content, category})
+    registerTaskFn({title, content, category})
   }
 
   return (

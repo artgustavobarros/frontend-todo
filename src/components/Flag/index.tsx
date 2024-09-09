@@ -1,8 +1,21 @@
+import { Category } from "@/api/@types"
+import { tv } from "tailwind-variants"
 
 interface FlagProps{
-  priority: string
+  priority: Category
 }
 
+const flag = tv({
+  base: 'h-full w-1',
+  variants:{
+    color:{
+      green: 'bg-green-500',
+      yellow: 'bg-yellow-500',
+      red: 'bg-red-500'
+    }
+  }
+})
+
 export function Flag({priority}: FlagProps){
-  return <span className={`h-full w-1 bg-${priority}-500`}/>
+  return <span className={flag({color:priority})}/>
 }

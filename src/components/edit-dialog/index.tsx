@@ -1,11 +1,13 @@
 import { PencilLine } from '@phosphor-icons/react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { PrioritySelect } from '../Priority-select';
+import { PrioritySelect } from '../priority-select';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Task } from '@/context/fetch-tasks/context';
-import { useTask } from '@/context/fetch-tasks/use-tasks';
+import { Task } from '@/api/@types';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { editTask } from '@/api/edit-task';
+import { checkedEditButton } from '../task-line/variants';
 
 interface EditDialogProps{
   data: Task
@@ -20,23 +22,29 @@ const editTaskInputsValidation = z.object({
 type EditTaskFormSchema = z.infer<typeof editTaskInputsValidation>
 
 export function EditDialog({data}: EditDialogProps){
-
-  const {editTask} = useTask()
+  const queryClient = useQueryClient()
 
   const {register, handleSubmit, control} = useForm<EditTaskFormSchema>({resolver: zodResolver(editTaskInputsValidation)})
+
+  const {mutateAsync: editTaskFn} = useMutation({
+    mutationFn: editTask,
+    onSuccess(){
+      queryClient.invalidateQueries({queryKey: ['todo-tasks']})
+    }
+  })
 
   function handleEditTask(values: EditTaskFormSchema){
     const title = values.title ?? data.title
     const content = values.content ?? data.content
     const category = values.category ?? data.category
     const id = data.id
-    editTask({id ,title, content, category})
+    editTaskFn({id, title, content, category})
   }
 
   return  (
     <Dialog.Root>
       <Dialog.Trigger>
-      <PencilLine className="text-text-pattern text-xl"/>
+      <PencilLine className={checkedEditButton({progress: data.status})}/>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className='fixed inset-0 bg-bg-overlay backdrop-blur-md'/>

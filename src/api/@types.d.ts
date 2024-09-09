@@ -1,3 +1,7 @@
+type Category = 'green' | 'yellow' | 'red'
+
+type Status = 'done' | 'undone'
+
 interface Task {
   id: string
   authorId: string

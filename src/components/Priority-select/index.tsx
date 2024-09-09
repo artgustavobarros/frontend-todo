@@ -1,7 +1,7 @@
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import { Control, Controller } from 'react-hook-form';
-import { CreateNewTaskFormSchema } from '../New-task';
-import { Category } from '@/context/fetch-tasks/types';
+import { CreateNewTaskFormSchema } from '../create-new-task-button';
+import { Category } from '@/api/@types';
 
 interface PrioritySelectProps{
   control: Control<CreateNewTaskFormSchema, Category>
